@@ -49,11 +49,14 @@ module Rails
       per_page_header = ApiPagination.config.per_page_header
       page_header     = ApiPagination.config.page_header
       include_total   = ApiPagination.config.include_total
+      include_body    = ApiPagination.config.include_body
 
       headers['Link'] = links.join(', ') unless links.empty?
       headers[per_page_header] = options[:per_page].to_s
       headers[page_header] = options[:page].to_s unless page_header.nil?
       headers[total_header] = total_count(pagy || collection, options).to_s if include_total
+
+      return [collection, { page_info: { next_page: !collection.next_page.nil?, next_page_number: collection.next_page } }] if include_body
 
       return collection
     end

@@ -25,6 +25,7 @@ module Grape
           per_page_header = ApiPagination.config.per_page_header
           page_header     = ApiPagination.config.page_header
           include_total   = ApiPagination.config.include_total
+          include_body    = ApiPagination.config.include_body
 
           header 'Link',          links.join(', ') unless links.empty?
           header total_header,    ApiPagination.total_from(pagy || collection).to_s if include_total

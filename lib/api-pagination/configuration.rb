@@ -12,6 +12,8 @@ module ApiPagination
 
     attr_accessor :response_formats
 
+    attr_accessor :include_body
+
     def configure(&block)
       yield self
     end
@@ -23,6 +25,7 @@ module ApiPagination
       @include_total   = true
       @base_url   = nil
       @response_formats = [:json, :xml]
+      @include_body = true
     end
 
     ['page', 'per_page'].each do |param_name|
